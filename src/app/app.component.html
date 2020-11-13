@@ -1,4 +1,32 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
+<mat-sidenav-container class="example-container" [hasBackdrop]="true">
+  <mat-sidenav #sidenav position="end">
+    <ng-container [ngSwitch]="componentType">
+      <ng-container *ngSwitchCase="'location'">
+        <app-delivery-location (close)="closeSidenav()"></app-delivery-location>
+      </ng-container>
+      <ng-container *ngSwitchCase="'contact'">
+        <app-login (close)="closeSidenav()" (forgotComponentOpen)="openSidenav('forgot')"
+          (createComponentOpen)="openSidenav('create')"></app-login>
+      </ng-container>
+      <ng-container *ngSwitchCase="'forgot'">
+        <app-forgot (close)="closeSidenav()" (loginComponent)="openSidenav('contact')"></app-forgot>
+      </ng-container>
+      <ng-container *ngSwitchCase="'create'">
+        <app-create (close)="closeSidenav()" (loginComponent)="openSidenav('contact')"></app-create>
+      </ng-container>
+      <ng-container *ngSwitchCase="'takeway'">
+        <app-takeway-location (takewayLocation)="closeSidenav()"></app-takeway-location>
+      </ng-container>
+    </ng-container>
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+    <div class="app-body overlap-to-div" (window:resize)="onResize()">
+      
+      <app-navbar (close)="openSidenav('contact')"></app-navbar>
+      <router-outlet></router-outlet>
+      <!-- <app-ourmenu></app-ourmenu> -->
+      <app-footer></app-footer>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

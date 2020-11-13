@@ -1,0 +1,8 @@
+
+
+<ng-container *ngIf="orderList.length > 0">
+   <app-orderlist></app-orderlist>
+</ng-container>
+<ng-container *ngIf="orderList.length == 0">
+    <app-no-order></app-no-order>
+</ng-container>
